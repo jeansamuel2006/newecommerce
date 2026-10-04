@@ -2,7 +2,6 @@ import json
 from pathlib import Path
 
 from src.category import Category
-from src.product import Product
 from src.utils import load_data
 
 
@@ -29,6 +28,5 @@ def test_load_data(tmp_path: Path) -> None:
     assert len(categories) == 1
     assert isinstance(categories[0], Category)
     assert categories[0].name == "Смартфоны"
-    assert isinstance(categories[0].products[0], Product)
-    assert categories[0].products[0].name == "iPhone 15"
-    assert categories[0].products[0].price == 210000.0
+    assert "iPhone 15" in categories[0].products
+    assert "210000.0" in categories[0].products
