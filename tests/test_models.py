@@ -74,3 +74,19 @@ def test_price_setter_negative(
     captured = capsys.readouterr()
     assert "Цена не должна быть" in captured.out
     assert product.price == 210000.0
+
+
+def test_product_str(product: Product) -> None:
+    assert str(product) == "iPhone 15, 210000.0 руб. Остаток: 8 шт."
+
+
+def test_category_str(product: Product) -> None:
+    other = Product("Samsung", "256GB", 180000.0, 5)
+    category = Category("Смартфоны", "...", [product, other])
+    assert str(category) == "Смартфоны, количество продуктов: 13 шт."
+
+
+def test_product_add() -> None:
+    a = Product("A", "...", 100.0, 10)
+    b = Product("B", "...", 200.0, 2)
+    assert a + b == 1400.0
