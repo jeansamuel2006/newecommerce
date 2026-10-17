@@ -25,3 +25,13 @@ lint = [
     "black (>=26.5.1,<27.0.0)",
     "isort (>=9.0.2,<10.0.0)"
 ]
+[tool.black]
+line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
+[tool.mypy]
+explicit_package_bases = true
+namespace_packages = true
+ignore_missing_imports = true
