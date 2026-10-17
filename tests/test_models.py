@@ -72,7 +72,7 @@ def test_price_setter_negative(
 ) -> None:
     product.price = -50
     captured = capsys.readouterr()
-    assert "Цена не должна быть" in captured.out
+    assert "некорректная" in captured.out
     assert product.price == 210000.0
 
 
