@@ -1,4 +1,38 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class BaseProduct(ABC):
+    """Абстрактный базовый класс для всех продуктов."""
+
+    @abstractmethod
+    def __str__(self) -> str:
+        ...
+
+    @abstractmethod
+    def __add__(self, other: object) -> float:
+        ...
+
+
+class CreationLoggerMixin:
+    """Печатает в консоль, какой объект и с какими параметрами создан."""
+
+    name: str
+    description: str
+    price: float
+    quantity: int
+
+    def __init__(self, *args: object, **kwargs: object) -> None:
+        super().__init__(*args, **kwargs)
+        print(repr(self))
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}({self.name!r}, "
+            f"{self.description!r}, {self.price!r}, {self.quantity!r})"
+        )
+
+
+class Product(CreationLoggerMixin, BaseProduct):
     """Базовый класс товара."""
 
     def __init__(self, name, description, price, quantity):
@@ -6,6 +40,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
 
     @classmethod
     def new_product(cls, data):
