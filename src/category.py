@@ -28,6 +28,14 @@ class Category:
     def products(self):
         return "".join(f"{product}\n" for product in self.__products)
 
+    def average_price(self) -> float:
+        """Средний ценник всех товаров; 0, если категория пуста."""
+        try:
+            total = sum(product.price for product in self.__products)
+            return total / len(self.__products)
+        except ZeroDivisionError:
+            return 0
+
     def __str__(self):
         total = sum(product.quantity for product in self.__products)
         return f"{self.name}, количество продуктов: {total} шт."
